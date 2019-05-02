@@ -1,0 +1,92 @@
+﻿@model OnlineProjectTracking.DAL.ProjectTask
+@{
+    ViewBag.Title = "Details";
+}
+<div class="row" style="margin-top:30px;">
+    <h4 style="float:left;margin-left:20px;">Task Details</h4>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <table style="width:100%;">
+            <tbody>
+                <tr class="task-details-tr">
+                    <th> Project Name </th>
+                    <td> @Html.DisplayFor(model => model.UserStory.Project.ProjectName) </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th> User Story </th>
+                    <td> @Html.DisplayFor(model => model.UserStory.Story) </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th>Assigned To</th>
+                    <td> @Html.DisplayFor(model => model.Employee.EmployeeName) </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th>Start Date</th>
+                    <td>   @Html.DisplayFor(model => model.TaskStartDate) </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th>End Date</th>
+                    <td> @Html.DisplayFor(model => model.TaskEndDate) </td>
+                </tr>
+
+                <tr class="task-details-tr">
+                    <th>Task Name</th>
+                    <td> @Html.DisplayFor(model => model.TaskName) </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th>Task Type</th>
+                    <td> @Html.DisplayFor(model => model.TaskType)</td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th>Task Data</th>
+                    <td>
+                        @if (string.IsNullOrEmpty(Model.TaskData))
+                        {
+                            <span>NA</span>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Download Data", "DownloadTaskData", "ProjectTasks", new { id = Model.ProjectTaskID }, new { })
+                        }
+                    </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th>Employee Response</th>
+                    <td>
+                        @if (string.IsNullOrEmpty(Model.TaskCompletionDesciption))
+                        {
+                            <span>NA</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.TaskCompletionDesciption)
+                        }
+                    </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th> Manager Comments </th>
+                    <td> @Html.DisplayFor(model => model.ManagerComments.FirstOrDefault(m => m.ProjectTaskID == Model.ProjectTaskID).Comments) </td>
+                </tr>
+                <tr class="task-details-tr">
+                    <th>Task Status</th>
+                    <td>
+                        @if (Model.TaskStatus == 0)
+                        {
+                            <span class="task-status task-pending">Pending</span>
+                        }
+                        else
+                        {
+                            <span class="task-status task-completed">Completed</span>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,103 @@
+﻿@model OnlineProjectTracking.DAL.Employee
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="row" style="margin-top:30px;">
+    <div class="col-md-8 col-md-offset-2">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Edit Employee</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.EmployeeID)
+
+                <div class="form-group">
+                    @Html.Label("Employee Name", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Designation", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.Designation, (IEnumerable<SelectListItem>)ViewBag.Designations, new { @class = "form-control", @onchange = "designation_changed(this)", id = "ddl_designation" })
+                        @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" id="managerSelect">
+                    @Html.Label("Manager Name", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.ManagerID, (IEnumerable<SelectListItem>)ViewBag.Managers, new { @class = "form-control", @onchange = "designation_changed(this)", id = "ddl_manager" })
+                        @Html.ValidationMessageFor(model => model.ManagerID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Contact No", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Employee Email", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.EMailID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EMailID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Skill Sets", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.SkillSets, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SkillSets, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <input type="submit" value="Save" class="btn btn-primary col-md-12" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "ViewAllEmployees")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function designation_changed(ddlObj) {
+            if (ddlObj.value === 'Project Manager') {
+                $('#managerSelect').slideUp('slow');
+            }
+            else {
+                $('#managerSelect').slideDown('slow');
+            }
+        }
+    </script>
+    @if (TempData["employee_eidt_success"] != null)
+    {
+        <script>
+            swal("Success", "Employee record updated successfully.", "success");
+        </script>
+    }
+    @if (TempData["employee_eidt_error"] != null)
+    {
+        <script>
+            swal("Server Error", "Unknown server error while upadting employee", "error");
+        </script>
+    }
+}

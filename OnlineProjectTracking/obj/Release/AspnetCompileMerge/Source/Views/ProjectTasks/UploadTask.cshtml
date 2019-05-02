@@ -1,0 +1,62 @@
+﻿@model OnlineProjectTracking.DAL.ProjectTask
+
+@{
+    ViewBag.Title = "UploadTask";
+}
+<div class="row" style="margin-top:30px;">
+    <div class="col-md-8 col-md-offset-2">
+        @using (Html.BeginForm("UploadTask", "ProjectTasks", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h4>Upload Task</h4>
+                <hr />
+                @Html.HiddenFor(model => model.ProjectTaskID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TaskName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Task Data</label>
+                    <div class="col-md-10">
+                        <input type="file" name="file" id="file" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Task Completion Desciption</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.TaskCompletionDesciption, 5, 20, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TaskCompletionDesciption, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary col-md-12">Upload Task</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["data_upload_ok"] != null)
+    {
+        <script>
+            swal("Success", "Task data uploaded successfully", "success");
+        </script>
+    }
+    @if (TempData["data_upload_error"] != null)
+    {
+        <script>
+            console.log('@TempData["data_upload_error"].ToString()');
+            swal("Server Error", "Unknown server error while uploading task data", "error");
+        </script>
+    }
+}

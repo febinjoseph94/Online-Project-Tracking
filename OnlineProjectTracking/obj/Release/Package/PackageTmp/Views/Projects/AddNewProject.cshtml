@@ -1,0 +1,95 @@
+﻿@model OnlineProjectTracking.ViewModels.ProjectViewModel
+@{
+    ViewBag.Title = "Add New Project";
+}
+<div class="row" style="margin-top:30px;">
+    <div class="col-md-8 col-md-offset-2">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Add New Project</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", type = "text" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", type = "text" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ProjectDescription, 5, 20, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 col-md-offset-4">
+                    <button type="submit" class="btn btn-primary col-md-12">Add New Project</button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        jQuery('#StartDate').datetimepicker(
+            {
+                value: new Date(),
+                format: 'Y-m-d H:i:s',
+            });
+        jQuery('#EndDate').datetimepicker(
+            {
+                value: new Date(),
+                format: 'Y-m-d H:i:s',
+            });
+    </script>
+    @if (TempData["newproject_success"] != null)
+    {
+        <script>
+            swal("Success", "New project added successfully", "success");
+        </script>
+    }
+    @if (TempData["newproject_error"] != null)
+    {
+        <script>
+            swal("Server Error", "Unknown server error while adding new project", "error");
+        </script>
+    }
+}

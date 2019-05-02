@@ -1,0 +1,62 @@
+﻿@model OnlineProjectTracking.DAL.UserStory
+@{
+    ViewBag.Title = "Add New Story";
+}
+<div class="row" style="margin-top:30px;">
+    <div class="col-md-8 col-md-offset-2">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h4>Add New Story</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label col-md-2">Project Name</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.ProjectID, (IEnumerable<SelectListItem>)ViewBag.Projects, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.ProjectID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Story, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Story, 4, 20, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.Story, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Acceptance Criteria</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.AcceptanceCriteria, 4, 20, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.AcceptanceCriteria, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <input type="submit" value="Save" class="btn btn-primary col-md-12" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (TempData["newstory_success"] != null)
+    {
+        <script>
+            swal("Success", "New story added successfully", "success");
+        </script>
+    }
+    @if (TempData["newstory_error"] != null)
+    {
+        <script>
+            swal("Server Error", "Unknown server error while adding new story", "error");
+        </script>
+    }
+}

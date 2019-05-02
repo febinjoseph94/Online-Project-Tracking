@@ -1,0 +1,111 @@
+﻿@model IEnumerable<OnlineProjectTracking.DAL.ProjectTask>
+@{
+    ViewBag.Title = "Project Tasks";
+}
+<div class="row" style="margin-top:30px;">
+    <h4 style="float:left;margin-left:20px;">View All Tasks</h4>
+    @if (!Session["role"].ToString().Equals("Developer") && !Session["role"].ToString().Equals("Designer"))
+    {
+        <a href="@Url.Action("AddNewTask")" class="btn btn-primary" style="float:right;margin-right:20px;">Add New Project Task</a>
+    }
+</div>
+<hr />
+<table class="table table-striped table-hover">
+    <tr class="info">
+        <th>Task Name</th>
+        <th>Assigned To</th>
+        <th>Task Start</th>
+        <th>Task End</th>
+        <th>Task Type</th>
+        <th>Task Status</th>
+        <th>Mark Completed</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class="success">
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskType)
+            </td>
+            <td>
+                @if (item.TaskStatus == 0)
+                {
+                    <span class="task-status task-pending" id="@item.ProjectTaskID">Pending</span>
+                }
+                else
+                {
+                    <span class="task-status task-completed" id="@item.ProjectTaskID">Completed</span>
+                }
+            </td>
+            <td style="text-align:center">
+                @if (item.TaskStatus == 0)
+                {
+                    @Html.CheckBox("task_status", false, new { @id = item.ProjectTaskID, @class = "regular-checkbox", @onclick = "SetTaskStatus(this)" })
+                }
+                else
+                {
+                    @Html.CheckBox("task_status", true, new { @id = item.ProjectTaskID, @class = "regular-checkbox", @onclick = "SetTaskStatus(this)" })
+                }
+            </td>
+            <td>
+                @if (!Session["role"].ToString().Equals("Developer") && !Session["role"].ToString().Equals("Designer"))
+                {
+                    @Html.ActionLink("Add Comment", "AddComment", "ManagerComments", new { id = item.ProjectTaskID }, new { })
+
+                }
+                else
+                {
+                    @Html.ActionLink("Upload Task", "UploadTask", "ProjectTasks", new { id = item.ProjectTaskID }, new { })
+                }
+                <span> | </span>
+                @Html.ActionLink("Details", "Details", "ProjectTasks", new { id = item.ProjectTaskID }, new { })
+            </td>
+        </tr>
+    }
+</table>
+<script>
+    function SetTaskStatus(data) {
+        var selected_task_id = data.id;
+        console.log(selected_task_id);
+        var status = $(data).is(':checked') == true ? 1 : 0;
+        $.ajax({
+            url: '/ProjectTasks/MarkCompleted',
+            type: 'POST',
+            data: { task_id: selected_task_id, task_status: status },
+            success: function (data) {
+                if (data.code == 200) {
+                    if (status == 0) {
+                        $('#' + selected_task_id).removeClass('task-completed');
+                        $('#' + selected_task_id).addClass('task-pending');
+                        $('#' + selected_task_id).text('Pending');
+                    }
+                    else {
+                        $('#' + selected_task_id).removeClass('task-pending');
+                        $('#' + selected_task_id).addClass('task-completed');
+                        $('#' + selected_task_id).text('Completed');
+                    }
+                }
+                else {
+                    alert('unknown server error');
+                }
+            },
+            error: function (x1, x2, x3) {
+                console.log(x1);
+                console.log(x2);
+                console.log(x3);
+            }
+        });
+    }
+</script>

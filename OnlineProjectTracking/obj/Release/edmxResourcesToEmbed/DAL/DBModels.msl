@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="febinjoseph_dbModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="febinjoseph_dbModel.Employee">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="EMailID" ColumnName="EMailID" />
+          <ScalarProperty Name="SkillSets" ColumnName="SkillSets" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManagerComments">
+      <EntityTypeMapping TypeName="febinjoseph_dbModel.ManagerComment">
+        <MappingFragment StoreEntitySet="ManagerComments">
+          <ScalarProperty Name="ManagerCommentID" ColumnName="ManagerCommentID" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="ProjectTaskID" ColumnName="ProjectTaskID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="febinjoseph_dbModel.Project">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectTasks">
+      <EntityTypeMapping TypeName="febinjoseph_dbModel.ProjectTask">
+        <MappingFragment StoreEntitySet="ProjectTasks">
+          <ScalarProperty Name="ProjectTaskID" ColumnName="ProjectTaskID" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="TaskStartDate" ColumnName="TaskStartDate" />
+          <ScalarProperty Name="TaskEndDate" ColumnName="TaskEndDate" />
+          <ScalarProperty Name="UserStoryID" ColumnName="UserStoryID" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+          <ScalarProperty Name="TaskData" ColumnName="TaskData" />
+          <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+          <ScalarProperty Name="TaskCompletionDesciption" ColumnName="TaskCompletionDesciption" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAccounts">
+      <EntityTypeMapping TypeName="febinjoseph_dbModel.UserAccount">
+        <MappingFragment StoreEntitySet="UserAccount">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsNewPassword" ColumnName="IsNewPassword" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserStories">
+      <EntityTypeMapping TypeName="febinjoseph_dbModel.UserStory">
+        <MappingFragment StoreEntitySet="UserStories">
+          <ScalarProperty Name="UserStoryID" ColumnName="UserStoryID" />
+          <ScalarProperty Name="Story" ColumnName="Story" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="AcceptanceCriteria" ColumnName="AcceptanceCriteria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

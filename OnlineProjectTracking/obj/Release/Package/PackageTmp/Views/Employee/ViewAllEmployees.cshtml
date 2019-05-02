@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OnlineProjectTracking.DAL.Employee>
+@{
+    ViewBag.Title = "All Employees";
+}
+<div class="row" style="margin-top:30px;">
+    <h4 style="float:left;margin-left:20px;">View All Employees</h4>
+    <a href="@Url.Action("AddNewEmployee")" class="btn btn-primary" style="float:right;margin-right:20px;">Add New Employee</a>
+</div>
+<hr />
+<table class="table table-striped table-hover">
+    <tr class="info">
+        <th>Employee Name</th>
+        <th>Designation</th>
+        <th>Contact No.</th>
+        <th>Email ID</th>
+        <th>Skill Sets</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class="success">
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMailID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkillSets)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) 
+                @if (Session["role"].ToString().Equals("Admin"))
+                {
+                    <span>|</span> @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

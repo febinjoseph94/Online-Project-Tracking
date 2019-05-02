@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="OPTDBContext-Web.config Connection String" description="OPTDBContext Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DAL.DBModels.csdl|res://*/DAL.DBModels.ssdl|res://*/DAL.DBModels.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=febinjosephdbserver.database.windows.net;initial catalog=febinjoseph_db;persist security info=True;user id=sqladmin;password=trigonometry@101;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Usman\\source\\repos\\OnlineProjectTracking\\OnlineProjectTracking\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='OPTDBContext']/@connectionString" />
+  </parameter>
+</parameters>

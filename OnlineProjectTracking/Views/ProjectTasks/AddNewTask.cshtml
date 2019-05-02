@@ -1,0 +1,97 @@
+﻿@model OnlineProjectTracking.DAL.ProjectTask
+@{
+    ViewBag.Title = "Add New Task";
+}
+<div class="row" style="margin-top:30px;">
+    <div class="col-md-8 col-md-offset-2">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h4>Add New Task</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">User Story</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.UserStoryID, (IEnumerable<SelectListItem>)ViewBag.UserStories, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.UserStoryID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Assigned To</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.AssignedTo, (IEnumerable<SelectListItem>)ViewBag.Employees, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.AssignedTo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Task Name</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Task Type</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.TaskType, (IEnumerable<SelectListItem>)ViewBag.TaskTypes, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.TaskType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Start Date</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TaskStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TaskStartDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">End Date</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TaskEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TaskEndDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary col-md-12">Add New Task</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        jQuery('#TaskStartDate').datetimepicker(
+            {
+                value: new Date(),
+                format: 'Y-m-d H:i:s',
+            });
+        jQuery('#TaskEndDate').datetimepicker(
+            {
+                value: new Date(),
+                format: 'Y-m-d H:i:s',
+            });
+    </script>
+    @if (TempData["newtask_success"] != null)
+    {
+        <script>
+            swal("Success", "New task added successfully", "success");
+        </script>
+    }
+    @if (TempData["newtask_error"] != null)
+    {
+        <script>
+            swal("Server Error", "Unknown server error while adding new task", "error");
+        </script>
+    }
+}

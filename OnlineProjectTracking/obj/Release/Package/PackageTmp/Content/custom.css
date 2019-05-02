@@ -1,0 +1,18 @@
+﻿.task-status {
+    border-radius: 10px;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    font-size: small;
+}
+
+.task-pending {
+    background-color: orange;
+}
+
+.task-completed {
+    background-color: green;
+}
+
+.task-details-tr{
+    height:30px;
+}

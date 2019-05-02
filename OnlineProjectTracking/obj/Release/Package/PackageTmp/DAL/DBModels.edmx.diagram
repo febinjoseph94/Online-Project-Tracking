@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef543501b95142828f6800b3340e61be" Name="Diagram1">
+        <EntityTypeShape EntityType="febinjoseph_dbModel.Employee" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="febinjoseph_dbModel.ManagerComment" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="febinjoseph_dbModel.Project" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="febinjoseph_dbModel.ProjectTask" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="febinjoseph_dbModel.UserAccount" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="febinjoseph_dbModel.UserStory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="febinjoseph_dbModel.FK__ProjectTa__Assig__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="febinjoseph_dbModel.FK__UserAccou__Emplo__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="febinjoseph_dbModel.FK__ManagerCo__Proje__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="febinjoseph_dbModel.FK__UserStori__Proje__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="febinjoseph_dbModel.FK__ProjectTa__UserS__787EE5A0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
